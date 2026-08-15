@@ -16,6 +16,6 @@ output "elasticsearch_vpc_endpoints_region" {
 }
 output "elasticsearch_vpc_endpoints_vpc_options" {
   description = "Map of vpc_options values across all elasticsearch_vpc_endpoints, keyed the same as var.elasticsearch_vpc_endpoints"
-  value       = { for k, v in aws_elasticsearch_vpc_endpoint.elasticsearch_vpc_endpoints : k => v.vpc_options if v.vpc_options != null && length(v.vpc_options) > 0 }
+  value       = { for k, v in aws_elasticsearch_vpc_endpoint.elasticsearch_vpc_endpoints : k => one(v.vpc_options) if v.vpc_options != null && length(v.vpc_options) > 0 }
 }
 
